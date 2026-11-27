@@ -1,0 +1,134 @@
+/* Poker Chips: a phone lying on a card table, read at arm's length in a dim room. */
+@import '@fontsource/archivo/500.css';
+@import '@fontsource/archivo/700.css';
+@import '@fontsource/archivo/900.css';
+@import '@fontsource/archivo-narrow/500.css';
+@import '@fontsource/archivo-narrow/700.css';
+
+:root {
+  /* clay-chip colours on night baize */
+  --baize: #0f2a26;
+  --baize-deep: #0a1f1c;
+  --baize-hi: #18413a;
+  --bone: #f2ead8;
+  --bone-dim: rgb(242 234 216 / 0.64);
+  --line: rgb(242 234 216 / 0.16);
+  --ink: #10201d;
+  --ink-dim: rgb(16 32 29 / 0.62);
+  --ink-line: rgb(16 32 29 / 0.18);
+  --red: #d6402f;
+  --red-deep: #a82c1f;
+  --gold: #e8b84a;
+
+  /* the surface flips to bone when it is your turn */
+  --bg: var(--baize);
+  --fg: var(--bone);
+  --fg-dim: var(--bone-dim);
+  --rule: var(--line);
+  --raised: var(--baize-hi);
+
+  --font: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  --font-narrow: 'Archivo Narrow', 'Arial Narrow', Arial, sans-serif;
+
+  --fs-xs: 0.8125rem;
+  --fs-sm: 0.9375rem;
+  --fs-md: 1.0625rem;
+  --fs-lg: 1.375rem;
+  --fs-xl: 1.75rem;
+  --fs-2xl: 2.5rem;
+
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+
+  --r-sm: 8px;
+  --r-lg: 16px;
+  --tap: 52px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; height: 100%; }
+
+body {
+  background: var(--baize);
+  color: var(--bone);
+  font-family: var(--font);
+  font-size: var(--fs-md);
+  font-weight: 500;
+  line-height: 1.35;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
+  touch-action: manipulation;
+}
+
+#app { min-height: 100dvh; }
+
+h1, h2, h3, p { margin: 0; }
+h1, h2, h3 { font-weight: 900; letter-spacing: -0.02em; line-height: 1.05; }
+button { font: inherit; color: inherit; cursor: pointer; }
+.num { font-variant-numeric: tabular-nums; }
+.dim { color: var(--fg-dim); }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  min-height: var(--tap);
+  padding: 0 var(--sp-4);
+  border-radius: var(--r-sm);
+  border: 2px solid var(--fg);
+  background: var(--fg);
+  color: var(--bg);
+  font-weight: 700;
+  font-size: var(--fs-md);
+  line-height: 1.1;
+  text-align: center;
+  user-select: none;
+}
+.btn:active:not(:disabled) { transform: translateY(1px); filter: brightness(0.92); }
+.btn:disabled { opacity: 0.38; cursor: default; }
+.btn--red { background: var(--red); border-color: var(--red); color: #fff; }
+.btn--gold { background: var(--gold); border-color: var(--gold); color: var(--ink); }
+.btn--line { background: transparent; color: var(--fg); border-color: var(--rule); }
+.btn--small { min-height: 40px; padding: 0 var(--sp-3); font-size: var(--fs-sm); }
+
+input[type='text'], input[type='number'], select {
+  font: inherit;
+  font-weight: 700;
+  color: var(--bone);
+  background: var(--baize-deep);
+  border: 2px solid var(--line);
+  border-radius: var(--r-sm);
+  min-height: var(--tap);
+  padding: 0 var(--sp-3);
+  width: 100%;
+  min-width: 0;
+}
+input::placeholder { color: var(--bone-dim); font-weight: 500; }
+input:focus, select:focus { outline: none; border-color: var(--gold); }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+
+.field { display: flex; flex-direction: column; gap: var(--sp-1); min-width: 0; }
+.field > span { font-size: var(--fs-xs); color: var(--fg-dim); }
+
+/* a page of setup (home, lobby, settle-up): one readable column */
+.page {
+  max-width: 30rem;
+  margin: 0 auto;
+  min-height: 100dvh;
+  padding: max(var(--sp-5), env(safe-area-inset-top)) max(var(--sp-4), env(safe-area-inset-right))
+    max(var(--sp-5), env(safe-area-inset-bottom)) max(var(--sp-4), env(safe-area-inset-left));
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
